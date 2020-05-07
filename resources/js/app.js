@@ -1,1 +1,4 @@
 require('./bootstrap');
+
+require('admin-lte/dist/js/adminlte');
+require('admin-lte/dist/js/adminlte.min');
