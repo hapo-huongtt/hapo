@@ -16,15 +16,15 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            $member = Auth::member();
-            if ($member->role == 1) {
-                return $next($request);
-            } else {
-                return redirect('member/login');
-            }
-        } else {
-            return redirect('member/login');
-        }
+        // if (Auth::check()) {
+        //     $member = Auth::member();
+        //     if ($member->role == 1) {
+        //         return $next($request);
+        //     } else {
+        //         return redirect('member/login');
+        //     }
+        // } else {
+        //     return redirect('member/login');
+        // }
     }
 }

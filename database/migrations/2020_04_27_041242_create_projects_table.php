@@ -17,9 +17,13 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('project_name');
             $table->string('description');
-            $table->tinyInteger('status');
-            $table->timestamps();
+            $table->bigInteger('status_id');
+            $table->date('began_at');
+            $table->date('finished_at');
             $table->bigInteger('member_id')->unsigned();
+            $table->integer('customer_id');
+            $table->timestamps();
+            
         });
     }
 

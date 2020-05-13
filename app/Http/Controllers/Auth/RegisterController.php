@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -48,8 +50,9 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    { 
         return Validator::make($data, [
+            'image' => ['required', 'image', 'max:5000'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
             'age' => ['required', 'string', 'max:255'],
@@ -69,15 +72,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'age' => $data['age'],
-            'gender' => $data['gender'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'role' => 0,
-            'password' => bcrypt($data['password']),
-        ]);
+        if (request()->has('image')) {
+            $imageupload = request()->file('image');
+            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
+            $imagepath = public_path('storage/images/');
+            $imageupload->move($imagepath, $imagename);
+            return Member::create([
+                'image' => 'storage/images/' . $imagename,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'age' => $data['age'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'],
+                'address' => $data['address'],
+                'role' => 0,
+                'is_admin' => 0,
+                'password' => Hash::make($data['password']),
+            ]);
+        }
     }
 }

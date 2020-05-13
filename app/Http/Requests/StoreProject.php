@@ -26,8 +26,10 @@ class StoreProject extends FormRequest
         return [
             'project_name' => 'required' | 'max:255',
             'description' => 'required' | 'max:255',
-            'status' => 'required' | 'max:255',
+            'status_id' => 'required' | 'max:255',
             'members_id' => 'required' | 'max:255',
+            'began_at' => 'required|date',
+            'finished_at' => 'required|date|after_or_equal:began_at',
         ];
     }
 }

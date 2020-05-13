@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminLte')
 
 @section('content')
 
@@ -25,7 +25,10 @@
                     <td class="text-center"><strong>ID</strong></td>
                     <td class="text-center"><strong>Task_name</strong></td>
                     <td class="text-center"><strong>Description</strong></td>
-                    <td class="text-center"><strong>Status</strong></td>
+                    <td class="text-center"><strong>Status_id</strong></td>
+                    <td class="text-center"><strong>Member_id</strong></td>
+                    <td class="text-center"><strong>Began_at</strong></td>
+                    <td class="text-center"><strong>Finish_at</strong></td>
                     <td colspan=3 class="text-center"><strong>Action</strong></td>
                 </tr>
             </thead>
@@ -36,6 +39,9 @@
                     <td class="text-center">{{$task->task_name}}</td>
                     <td class="text-center">{{$task->description}}</td>
                     <td class="text-center">{{$task->status}}</td>
+                    <td class="text-center">{{$task->member_id}}</td>
+                    <td class="text-center">{{$task->began_at}}</td>
+                    <td class="text-center">{{$task->finish_at}}</td>
                     <td>
                         <a class="btn btn-info" href="{{route('tasks.show',$task->id)}}">Show</a>
                     </td>

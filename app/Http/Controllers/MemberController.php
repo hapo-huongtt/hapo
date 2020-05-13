@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Member;
 use App\Http\Requests\StoreMember;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateMember;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Http\FormRequest;
 use Redirect;
 use Response;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::all();
-        return view('members.index', compact('members'));
+        return view('members.index', ['members' => $members]);
     }
 
     /**
@@ -39,8 +44,24 @@ class MemberController extends Controller
      */
     public function store(StoreMember $request)
     {
-        Member::create($request->only(['name', 'email', 'age', 'gender', 'phone', 'address', 'role', 'password']));
-        return redirect('members.index')->with('success', 'member save!');
+        if (request()->hasFile('image')) {
+            $imageupload = request()->file('image');
+            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
+            $imagepath = public_path('storage/images/' );
+            $imageupload->move($imagepath, $imagename);
+            Member::create([
+                'image' => 'storage/images/' . $imagename,
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'age' => $request['age'],
+                'gender' => $request['gender'],
+                'phone' => $request['phone'],
+                'address' => $request['address'],
+                'role' => 0,
+                'password' => Hash::make($request['password']),
+            ]);
+        }
+        return redirect()->route('members.index')->with('success', __('messages.create'));
     }
 
     /**
@@ -52,7 +73,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.show', compact('member'));
+        return view('members.show', ['members' => $member]);
     }
 
     /**
@@ -64,7 +85,7 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.edit', compact('member'));
+        return view('members.edit', ['member' => $member]);
     }
 
     /**
@@ -74,11 +95,26 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreMember  $request, $id)
+
+    public function update(UpdateMember  $request, $id)
     {
-        $member = Member::findOrFail($id);
-        $member->update($request->only(['name', 'email', 'age','gender', 'phone', 'address', 'role', 'password']));
-        return redirect()->route('members.index')->with('success', 'member update!');
+        $data = $request->all();
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $imageName = 'storage/images/' . $imageName;
+        $member = [
+            'image' => $imageName,
+            'name' => $data['name'],
+            'age' => $data['age'],
+            'gender' => $data['gender'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'role' => 0,
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ];
+        $member = Member::findOrFail($id)->update($member);
+        return redirect()->route('members.index')->with('success', __('messages.update'));
     }
 
     /**
@@ -91,6 +127,6 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $member->delete();
-        return redirect('/members')->with('member', 'member is successfully deleted');
+        return redirect()->route('members.index')->with('success', __('messages.destroy'));
     }
 }

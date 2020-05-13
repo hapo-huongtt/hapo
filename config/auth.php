@@ -37,7 +37,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'members',
         ],
 
         'api' => [
@@ -45,12 +45,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'members',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'members',
+        // ],
         
-        'member' => [
+        'members' => [
             'driver' => 'session',
             'provider' => 'members',
         ],
@@ -117,6 +117,7 @@ return [
             'provider' => 'members',
             'table' => 'password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 

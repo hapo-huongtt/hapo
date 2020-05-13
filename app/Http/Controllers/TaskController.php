@@ -16,7 +16,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -37,7 +37,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create($request->only(['task_name', 'description', 'status', 'member_id']));
+        Task::create($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
         return redirect('tasks.index')->with('success', 'Task save!');
     }
 
@@ -75,7 +75,7 @@ class TaskController extends Controller
     public function update(StoreTask $request, $id)
     {
         $task = Task::findOrFail($id);
-        $task->update($request->only(['task_name', 'description', 'status', 'member_id']));
+        $task->update($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
         return redirect()->route('tasks.index')->with('success', 'Task update!');
     }
 

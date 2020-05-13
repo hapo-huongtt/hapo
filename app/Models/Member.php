@@ -8,17 +8,19 @@ use Illuminate\Notifications\Notifiable;
 
 class Member extends Authenticatable
 {
+    const role = [
+        0 => 'User',
+        1 => 'Admin',
+    ];
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table = 'members';
     public $timestamp = false;
     protected $fillable = [
-         'name', 'email', 'password', 'age', 'gender', 'phone', 'address', 'role',
+         'image', 'name', 'email', 'password', 'age', 'gender', 'phone', 'address', 'role',
     ];
 
     /**
@@ -44,10 +46,6 @@ class Member extends Authenticatable
     }
     public function projects()
     {
-        return $this->belongstoMany('App\Models\Project');
-    }
-    public function members()
-    {
-        return $this->belongstoMany('App\Models\Member', 'member_project', 'projects_id', 'members_id');
+        return $this->belongstoMany('App\Models\Project', 'member_project');
     }
 }

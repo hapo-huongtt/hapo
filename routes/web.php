@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('layouts.adminLte');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -25,3 +25,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('members', 'MemberController');
 
 Route::resource('tasks', 'TaskController');
+
+// Route::prefix('projects')->name('projects.')->group(function () {
+//     Route::get('/', 'ProjectController@index')->name('index');
+//     Route::get('create', 'ProjectController@create')->name('create');
+// });
+
+// Route::resource('customers', 'CustomerController');
