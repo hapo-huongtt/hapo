@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Member;
 use App\Http\Requests\StoreMember;
 use App\Http\Requests\UpdateMember;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
-use Redirect;
-use Response;
 
 class MemberController extends Controller
 {
@@ -47,17 +46,17 @@ class MemberController extends Controller
         if (request()->hasFile('image')) {
             $imageupload = request()->file('image');
             $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
-            $imagepath = public_path('storage/images/' );
+            $imagepath = public_path('storage/images/');
             $imageupload->move($imagepath, $imagename);
             Member::create([
-                'image' => 'storage/images/' . $imagename,
+                'image' => 'storage/images/' .$imagename,
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'age' => $request['age'],
                 'gender' => $request['gender'],
                 'phone' => $request['phone'],
                 'address' => $request['address'],
-                'role' => 0,
+                'role' => $request['role'],
                 'password' => Hash::make($request['password']),
             ]);
         }
@@ -109,12 +108,12 @@ class MemberController extends Controller
             'gender' => $data['gender'],
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'role' => 0,
+            'role' => $data['role'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ];
         $member = Member::findOrFail($id)->update($member);
-        return redirect()->route('members.index')->with('success', __('messages.update'));
+        return redirect()->route('members.index')->with('success', ('messages.update'));
     }
 
     /**

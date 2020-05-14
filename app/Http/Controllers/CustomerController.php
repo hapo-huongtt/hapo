@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomer;
 use App\Http\Requests\UpdateCustomer;
-
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller

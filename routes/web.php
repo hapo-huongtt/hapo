@@ -30,5 +30,4 @@ Route::resource('tasks', 'TaskController');
 //     Route::get('/', 'ProjectController@index')->name('index');
 //     Route::get('create', 'ProjectController@create')->name('create');
 // });
-
 // Route::resource('customers', 'CustomerController');

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Member extends Authenticatable
 {
-    const role = [
+    const ROLE = [
         0 => 'User',
         1 => 'Admin',
     ];

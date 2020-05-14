@@ -28,6 +28,7 @@
                     <td class="text-center"><strong>Gender</strong></td>
                     <td class="text-center"><strong>Phone</strong></td>
                     <td class="text-center"><strong>Address</strong></td>
+                    <td class="text-center"><strong>Role</strong></td>
                     <td colspan=3 class="text-center"><strong>Action</strong></td>
                 </tr>
             </thead>
@@ -44,9 +45,9 @@
                     @else
                     <td class="text-center">Female</td>
                     @endif
-
                     <td class="text-center">{{$member->phone}}</td>
                     <td class="text-center">{{$member->address}}</td>
+                    <td class="text-center">{{$member->role}}</td>
                     <td>
                         <a class="btn btn-info" href="{{route('members.show',$member->id)}}">Show</a>
                     </td>

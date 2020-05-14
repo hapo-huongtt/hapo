@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Project;
 use App\Models\Customer;
 use App\Http\Requests\StoreProject;

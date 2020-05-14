@@ -1,5 +1,4 @@
 @extends('layouts.adminLte')
-
 @section('content')
 
 <div class="card">

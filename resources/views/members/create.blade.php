@@ -1,5 +1,4 @@
 @extends('layouts.adminLte')
-
 @section('content')
 
 <div class="row">
@@ -56,7 +55,7 @@
                             <label for="exampleFormControlSelect1" class="col-md-4 col-form-label">Gender</label>
                             <select class="form-control col-md-6" id="exampleFormControlSelect1" name="gender">
                                 <option>No</option>
-                                <option value="1">Famale</option>
+                                <option value="1">Female</option>
                                 <option value="2">Male</option>
                             </select>
                         </div>
@@ -81,6 +80,14 @@
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select name="role">
+                                @foreach(App\Models\Member::ROLE as $key => $label)
+                                <option value="{{ $key }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{ route('members.index') }}" class="btn btn-danger float-right">Cancel</a>
                     </div>
@@ -96,3 +103,4 @@
         </div>
 
         @endsection
+        

@@ -37,9 +37,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
-
         </ul>
-
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
           <!-- Authentication Links -->
@@ -57,13 +55,11 @@
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }} <span class="caret"></span>
             </a>
-
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
-
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>
@@ -81,14 +77,12 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-          <image href="#" class="img-circle elevation-2" src="{{asset('Auth::User()->image')}}" style="width:30px; height:30px">
-
+          <image class="img-circle elevation-2" src="{{asset(Auth::User()->image)}}" style="width:30px; height:30px">
           </div>
           <div class="info">
-            <a href="#" class="d-block h4" src="{{asset('Auth::User()->name')}}"></a>
+            <a href="#" class="d-block h4" >{{(Auth::User()->name)}}</a>
           </div>
         </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -23,7 +23,6 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('member_id')->unsigned();
             $table->integer('customer_id');
             $table->timestamps();
-            
         });
     }
 
