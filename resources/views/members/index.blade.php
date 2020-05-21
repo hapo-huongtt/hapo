@@ -6,11 +6,19 @@
         <div class="col-lg-12" style="text-align: center">
             <h1>Member</h1>
         </div>
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('members.create')}}">New member</a>
+        <div class="col-lg-12 margin-tb p-3">
+            <div class="pull-left">
+                <a class="btn btn-primary float-left " href="{{ route('members.create')}}">New member</a>
             </div>
         </div>
+        <!-- <div class="col-8 form-group">
+            <form action="{{ route('members.index') }}" method="GET">
+                <div class="input-group">
+                    <input type="search" name="searchByName" placeholder="Tên" class="form-control" value="{{ old('searchByName') }}" autocomplete="off">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </form>
+        </div> -->
         <br />
         @if ($message = Session::get('success'))
         <div class="alert alert-success">

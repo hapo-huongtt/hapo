@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="row">
-    <div class="container">
-        <div class="col-md-6">
+    <div class="container ">
+        <div class="col-md-6 ">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Add Task</h3>
+                    <h3 class="card-title h4">New Task</h3>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -33,51 +33,64 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <input type="description" class="form-control" name="description" autocomplete="off" placeholder="Enter description" value="{{ old('description') }}">
+                            <input type="text" class="form-control" name="description" autocomplete="off" placeholder="Enter description" value="{{ old('description') }}">
                             @error('description')
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Status_id</label>
-                            <input type="text" class="form-control" name="status_id" autocomplete="off" placeholder="Enter status_id" value="{{ old('status_id') }}">
-                            @error('status_id')
-                            <strong class="alert text-danger">{{ $message }}</strong>
-                            @enderror
+                            <label>Member_id</label>
+                            <select class="form-control" name="member_id">
+                                @foreach($members as $member)
+                                <option value="{{$member->id}}">{{$member->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Member_id</label>
-                            <input type="text" class="form-control" name="member_id" autocomplete="off" placeholder="Enter member_id" value="{{ old('member_id') }}">
-                            @error('member_id')
-                            <strong class="alert text-danger">{{ $message }}</strong>
-                            @enderror
+                            <label>Status_id</label>
+                            <select type="text" class="form-control" name="status_id">
+                                <option>Please choose a status</option>
+                                <option value="@php echo App\Models\Member::STATUS_PENDING @endphp">Pending</option>
+                                <option value="@php echo App\Models\Member::STATUS_CLOSE @endphp">completed</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Began_at</label>
-                            <input type="text" class="form-control" name="began_at" autocomplete="off" placeholder="Enter began_at" value="{{ old('began_at') }}">
-                            @error('began_at')
-                            <strong class="alert text-danger">{{ $message }}</strong>
-                            @enderror
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='date' class="form-control" id="datepicker" name="began_at">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Finish_at</label>
-                            <input type="text" class="form-control" name="finish_at" autocomplete="off" placeholder="Enter finish_at" value="{{ old('finish_at') }}">
-                            @error('password')
-                            <strong class="alert text-danger">{{ $message }}</strong>
-                            @enderror
+                            <label>Finished_at</label>
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='date' class="form-control" name="finished_at">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('tasks.index') }}" class="btn btn-danger float-right">Cancel</a>
                     </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ route('tasks.index') }}" class="btn btn-danger float-right">Cancel</a>
                 </form>
             </div>
-            <div class="col-sm-12">
-                @if(session()->get('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success')}}
-                </div>
-                @endif
-            </div>
         </div>
+        <div class="col-sm-12">
+            @if(session()->get('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success')}}
+            </div>
+            @endif
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                $('#datetimepicker').datetimepicker();
+            });
+        </script>
+    </div>
 
-        @endsection
+    @endsection
+    

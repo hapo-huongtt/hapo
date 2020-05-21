@@ -25,9 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('members', 'MemberController');
 
 Route::resource('tasks', 'TaskController');
-
-// Route::prefix('projects')->name('projects.')->group(function () {
-//     Route::get('/', 'ProjectController@index')->name('index');
-//     Route::get('create', 'ProjectController@create')->name('create');
-// });
-// Route::resource('customers', 'CustomerController');
+Route::resource('customers', 'CustomerController');
+Route::resource('projects', 'ProjectController');

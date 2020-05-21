@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Member;
 use App\Http\Requests\StoreTask;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        $member = Member::all();
+        return view('tasks.create', ['members' => $member]);
     }
 
     /**
@@ -35,10 +37,10 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTask $request)
     {
-        Task::create($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
-        return redirect('tasks.index')->with('success', 'Task save!');
+        Task::create($request->all());
+        return redirect()->route('tasks.index')->with('success', 'task save!');
     }
 
     /**
@@ -49,8 +51,10 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $task = Task::findOrFail($id);
-        return view('tasks.show', compact('task'));
+        $data = [
+            'task' => Task::findOrFail($id),
+        ];
+        return view('tasks.show', $data);
     }
 
     /**
@@ -61,8 +65,11 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::findOrFail($id);
-        return view('tasks.edit', compact('task'));
+        $data = [
+            'members' => Member::all(),
+            'task' => Task::findOrFail($id),
+        ];
+        return view('tasks.edit', $data);
     }
 
     /**
@@ -75,8 +82,8 @@ class TaskController extends Controller
     public function update(StoreTask $request, $id)
     {
         $task = Task::findOrFail($id);
-        $task->update($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
-        return redirect()->route('tasks.index')->with('success', 'Task update!');
+        $task->update($request->all());
+        return redirect()->route('tasks.index')->with('success', 'task update!');
     }
 
     /**

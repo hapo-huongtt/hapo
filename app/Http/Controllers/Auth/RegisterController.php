@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\StoreRegister;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,7 +61,7 @@ class RegisterController extends Controller
             'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'tinyInteger', 'max:255'],
+            'role' => ['nullable', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -67,17 +70,18 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\Member
+     * @return \App\User
      */
+
     protected function create(array $data)
     {
-        if (request()->has('image')) {
-            $imageupload = request()->file('images');
-            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
-            $imagepath = public_path('storage/images/');
-            $imageupload->move($imagepath, $imagename);
+        if (request()->hasFile('image')) {
+            $imageupload = request()->file('image');
+            $imagepath = config('file.members.file_path');
+            $image = Storage::put($imagepath, $imageupload);
+            $image = str_replace('public', 'storage', $image);
             return Member::create([
-                'image' => 'storage/images/' . $imagename,
+                'image' => $image,
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'age' => $data['age'],

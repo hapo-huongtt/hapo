@@ -7,13 +7,10 @@ use App\Http\Requests\StoreMember;
 use App\Http\Requests\UpdateMember;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class MemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +42,11 @@ class MemberController extends Controller
     {
         if (request()->hasFile('image')) {
             $imageupload = request()->file('image');
-            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
-            $imagepath = public_path('storage/images/');
-            $imageupload->move($imagepath, $imagename);
+            $imagepath = config('file.members.file_path');
+            $image = Storage::put($imagepath, $imageupload);
+            $image = str_replace('public', 'storage', $image);
             Member::create([
-                'image' => 'storage/images/' .$imagename,
+                'image' => $image,
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'age' => $request['age'],

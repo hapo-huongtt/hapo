@@ -12,13 +12,15 @@ class Member extends Authenticatable
         0 => 'User',
         1 => 'Admin',
     ];
+
+    const STATUS_PENDING = 0;
+    const STATUS_CLOSE = 1;
     use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public $timestamp = false;
     protected $fillable = [
          'image', 'name', 'email', 'password', 'age', 'gender', 'phone', 'address', 'role',
     ];
@@ -42,10 +44,10 @@ class Member extends Authenticatable
     ];
     public function tasks()
     {
-        return $this->hasMany('App\Models\Task');
+        return $this->hasMany('App\Models\task');
     }
     public function projects()
     {
-        return $this->belongstoMany('App\Models\Project', 'member_project');
+        return $this->belongstoMany(Project::class);
     }
 }

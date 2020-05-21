@@ -26,13 +26,6 @@
                                 <strong class="alert text-danger">{{ $message }}</strong>
                                 @enderror
                             </div>
-                            <div class="form-group row">
-                                <label>Gender</label>
-                                <input type="text" class="form-control" name="gender" autocomplete="off" placeholder="Enter gender" value="{{ old('gender', $customer->gender) }}" >
-                                @error('gender')
-                                <strong class="alert text-danger">{{ $message }}</strong>
-                                @enderror
-                            </div>
                             <div class="form-group">
                                 <label>Address</label>
                                 <input type="text" class="form-control" name="address" autocomplete="off" placeholder="Enter address" value="{{ old('address', $customer->address) }} ">

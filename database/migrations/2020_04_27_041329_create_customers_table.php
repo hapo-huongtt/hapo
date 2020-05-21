@@ -17,7 +17,6 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('image');
             $table->string('customer_name');
-            $table->string('gender');
             $table->string('address');
             $table->integer('phone')->default(50);
             $table->string('email');

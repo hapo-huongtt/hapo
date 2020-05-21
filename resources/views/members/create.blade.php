@@ -51,11 +51,11 @@
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1" class="col-md-4 col-form-label">Gender</label>
+                        <div class="form-group row ">
+                            <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">Gender</label>
                             <select class="form-control col-md-6" id="exampleFormControlSelect1" name="gender">
                                 <option>No</option>
-                                <option value="1">Female</option>
+                                <option value="1">Famale</option>
                                 <option value="2">Male</option>
                             </select>
                         </div>
@@ -103,4 +103,3 @@
         </div>
 
         @endsection
-        

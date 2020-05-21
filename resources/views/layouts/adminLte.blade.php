@@ -8,6 +8,14 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href="./css/prettify-1.0.css" rel="stylesheet">
+  <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+  <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -18,7 +26,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Home</a>
+          <a href="{{url('home')}}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -37,7 +45,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
+
         </ul>
+
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
           <!-- Authentication Links -->
@@ -55,11 +65,13 @@
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }} <span class="caret"></span>
             </a>
+
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
+
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>
@@ -77,10 +89,10 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-          <image class="img-circle elevation-2" src="{{asset(Auth::User()->image)}}" style="width:30px; height:30px">
+            <image class="img-circle elevation-2" src="{{asset(Auth::User()->image)}}" style="width:30px; height:30px">
           </div>
           <div class="info">
-            <a href="#" class="d-block h4" >{{(Auth::User()->name)}}</a>
+            <a href="#" class="d-block h4">{{(Auth::User()->name)}}</a>
           </div>
         </div>
         <!-- Sidebar Menu -->
@@ -99,7 +111,8 @@
               <a href="{{url('tasks')}}" class="nav-link">
                 <i class="nav-icon fas fas fa-edit"></i>
                 <p class=" h4">
-                  Task
+                  task
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
             </li>

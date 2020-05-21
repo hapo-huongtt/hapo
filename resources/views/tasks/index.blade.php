@@ -7,10 +7,9 @@
         <div class="col-lg-12" style="text-align: center">
             <h1>task</h1>
         </div>
-
-        <div class="col-lg-12 margin-tb p-3">
+        <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-primary"  href="{{ route('tasks.create')}}">New task</a>
+                <a class="btn btn-primary" href="{{ route('tasks.create')}}">New task</a>
             </div>
         </div>
         <br />
@@ -23,12 +22,12 @@
             <thead>
                 <tr>
                     <td class="text-center"><strong>ID</strong></td>
-                    <td class="text-center"><strong>Task_name</strong></td>
+                    <td class="text-center"><strong>task_name</strong></td>
                     <td class="text-center"><strong>Description</strong></td>
                     <td class="text-center"><strong>Status_id</strong></td>
                     <td class="text-center"><strong>Member_id</strong></td>
                     <td class="text-center"><strong>Began_at</strong></td>
-                    <td class="text-center"><strong>Finish_at</strong></td>
+                    <td class="text-center"><strong>Finished_at</strong></td>
                     <td colspan=3 class="text-center"><strong>Action</strong></td>
                 </tr>
             </thead>
@@ -38,10 +37,16 @@
                     <td class="text-center">{{$task->id}}</td>
                     <td class="text-center">{{$task->task_name}}</td>
                     <td class="text-center">{{$task->description}}</td>
-                    <td class="text-center">{{$task->status}}</td>
-                    <td class="text-center">{{$task->member_id}}</td>
+                    <td>
+                    @if ($task->status_id == 1)
+                        {{ "incomplete" }}
+                    @else
+                        {{ "complete" }}
+                    @endif
+                    </td>
+                    <td class="text-center">{{$task->members->name}}</td>
                     <td class="text-center">{{$task->began_at}}</td>
-                    <td class="text-center">{{$task->finish_at}}</td>
+                    <td class="text-center">{{$task->finished_at}}</td>
                     <td>
                         <a class="btn btn-info" href="{{route('tasks.show',$task->id)}}">Show</a>
                     </td>

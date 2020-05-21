@@ -24,12 +24,11 @@ class UpdateCustomer extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => 'required|max:100',
-            'gender' => 'required|max:50',
-            'image' => 'mimes:jpeg,jpg,png,gif|required|max:10240',
-            'email' => 'required|unique:customers,email,'.$this->customer,
-            'phone' => 'required|min:10|max:20',
-            'address' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'customer_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -1,6 +1,6 @@
 {
     "_readme": [
-        "This file locks the dependencies of your project to a known state",
+        "This file locks the dependencies of your task to a known state",
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
@@ -149,7 +149,7 @@
                 }
             ],
             "description": "Common String Manipulations with regard to casing and singular/plural rules.",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "http://www.doctrine-task.org",
             "keywords": [
                 "inflection",
                 "pluralize",
@@ -210,7 +210,7 @@
                 }
             ],
             "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
-            "homepage": "https://www.doctrine-project.org/projects/lexer.html",
+            "homepage": "https://www.doctrine-task.org/tasks/lexer.html",
             "keywords": [
                 "annotations",
                 "docblock",
@@ -3600,7 +3600,7 @@
                 }
             ],
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
-            "homepage": "https://www.doctrine-project.org/projects/instantiator.html",
+            "homepage": "https://www.doctrine-task.org/tasks/instantiator.html",
             "keywords": [
                 "constructor",
                 "instantiate"
@@ -4463,13 +4463,13 @@
                     "name": "Manuel Pichler",
                     "email": "github@manuel-pichler.de",
                     "homepage": "https://github.com/manuelpichler",
-                    "role": "Project Founder"
+                    "role": "task Founder"
                 },
                 {
                     "name": "Marc Würth",
                     "email": "ravage@bluewin.ch",
                     "homepage": "https://github.com/ravage84",
-                    "role": "Project Maintainer"
+                    "role": "task Maintainer"
                 },
                 {
                     "name": "Other contributors",
@@ -4477,7 +4477,7 @@
                     "role": "Contributors"
                 }
             ],
-            "description": "PHPMD is a spin-off project of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD.",
+            "description": "PHPMD is a spin-off task of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD.",
             "homepage": "https://phpmd.org/",
             "keywords": [
                 "mess detection",
@@ -4932,7 +4932,7 @@
                 {
                     "name": "Geert Bergman",
                     "homepage": "http://www.scrivo.org/",
-                    "role": "Project Author"
+                    "role": "task Author"
                 },
                 {
                     "name": "Vladimir Jimenez",
@@ -5566,7 +5566,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "description": "Library that helps with managing the version number of Git-hosted PHP tasks",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
         },
