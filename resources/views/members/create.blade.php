@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="container">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Add Member</h3>
@@ -51,9 +51,9 @@
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
-                        <div class="form-group row ">
-                            <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">Gender</label>
-                            <select class="form-control col-md-6" id="exampleFormControlSelect1" name="gender">
+                        <div class="form-group ">
+                            <label for="exampleFormControlSelect1" class="col-form-label">Gender</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="gender">
                                 <option>No</option>
                                 <option value="1">Famale</option>
                                 <option value="2">Male</option>
@@ -101,5 +101,7 @@
                 @endif
             </div>
         </div>
+    </div>
+</div>
 
-        @endsection
+@endsection

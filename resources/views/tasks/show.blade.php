@@ -2,9 +2,11 @@
 
 @section('content')
 
-<div class="card">
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Task</h3>
+    </div>
     <div class="card-body">
-        <h2>task</h2>
         <div class="form-group">
             <label for="name">task_name:</label>
             <p type="text" class="form-control">{{ $task->task_name}}</h3>
@@ -16,9 +18,9 @@
         <div class="form-group">
             <label for="status_id">Status:</label>
             @if($task->status_id === \App\Models\Member::STATUS_PENDING)
-                <p type="text" class="form-control">Pending</b></p>
+            <p type="text" class="form-control">Pending</b></p>
             @else
-                <p type="text" class="form-control">Completed</b></p>
+            <p type="text" class="form-control">Completed</b></p>
             @endif
         </div>
         <div class="form-group">

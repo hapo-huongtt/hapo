@@ -5,7 +5,7 @@
 <div class="row">
     <div class="container ">
         <div class="col-lg-12" style="text-align: center">
-            <h1>task</h1>
+            <h1>Task</h1>
         </div>
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
@@ -38,13 +38,13 @@
                     <td class="text-center">{{$task->task_name}}</td>
                     <td class="text-center">{{$task->description}}</td>
                     <td>
-                    @if ($task->status_id == 1)
-                        {{ "incomplete" }}
-                    @else
+                        @if ($task->status_id == 1)
                         {{ "complete" }}
-                    @endif
+                        @else
+                        {{ "pending" }}
+                        @endif
                     </td>
-                    <td class="text-center">{{$task->members->name}}</td>
+                    <td class="text-center">{{ $task->member_name }}</td>
                     <td class="text-center">{{$task->began_at}}</td>
                     <td class="text-center">{{$task->finished_at}}</td>
                     <td>

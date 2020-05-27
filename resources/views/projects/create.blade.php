@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="container ">
-        <div class="col-md-6 ">
+        <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title h4">New project</h3>
@@ -39,15 +39,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Member_id</label>
-                            <select class="form-control" name="member_id">
+                            <label>Member</label>
+                            <select class="selectpicker form-control" multiple style="width: 100%">
                                 @foreach($members as $member)
                                 <option value="{{$member->id}}">{{$member->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Customer_id</label>
+                            <label>Customer</label>
                             <select class="form-control" name="customer_id">
                                 @foreach($customers as $customer)
                                 <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
@@ -57,9 +57,9 @@
                         <div class="form-group">
                             <label>Status_id</label>
                             <select type="text" class="form-control" name="status_id">
-                                <option>No</option>
-                                <option value="1">incomplete</option>
-                                <option value="2">complete</option>
+                                <option>Please choose a status</option>
+                                <option value="@php echo App\Models\Member::STATUS_PENDING @endphp">Pending</option>
+                                <option value="@php echo App\Models\Member::STATUS_CLOSE @endphp">completed</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -93,11 +93,6 @@
             </div>
             @endif
         </div>
-        <script type="text/javascript">
-            $(function() {
-                $('#datetimepicker').datetimepicker();
-            });
-        </script>
     </div>
 
     @endsection

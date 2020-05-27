@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-12 margin-tb p-3">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('projects.create')}}">New project</a>
+                <a class="btn btn-primary" href="{{ route('projects.create')}}">New Project</a>
             </div>
         </div>
         @if ($message = Session::get('success'))
@@ -24,8 +24,8 @@
                     <td class="text-center"><strong>Project_name</strong></td>
                     <td class="text-center"><strong>Description</strong></td>
                     <td class="text-center"><strong>Status_id</strong></td>
-                    <td class="text-center"><strong>Member_id</strong></td>
-                    <td class="text-center"><strong>Customer_id</strong></td>
+                    <td class="text-center"><strong>Member</strong></td>
+                    <td class="text-center"><strong>Customer</strong></td>
                     <td class="text-center"><strong>Began_at</strong></td>
                     <td class="text-center"><strong>Finished_at</strong></td>
                     <td colspan=3 class="text-center"><strong>Action</strong></td>
@@ -39,13 +39,13 @@
                     <td class="text-center">{{$project->description}}</td>
                     <td>
                         @if ($project->status_id == 1)
-                        {{ "incomplete" }}
-                        @else
                         {{ "complete" }}
+                        @else
+                        {{ "pending" }}
                         @endif
                     </td>
-                    <td class="text-center">{{$project->member_id}}</td>
-                    <td class="text-center">{{$project->customer_id}}</td>
+                    <td class="text-center">{{$project->member_name}}</td>
+                    <td class="text-center">{{$project->customer_name}}</td>
                     <td class="text-center">{{$project->began_at}}</td>
                     <td class="text-center">{{$project->finished_at}}</td>
                     <td>

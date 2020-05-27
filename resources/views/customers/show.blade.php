@@ -2,9 +2,11 @@
 
 @section('content')
 
-<div class="card">
+<div class="card card-danger">
+    <div class="card-header">
+        <h3 class="card-title">Customer</h3>
+    </div>
     <div class="card-body">
-        <h2>Customer</h2>
         <div class="form-group">
             <label for="name">Customer_name:</label>
             <p type="text" class="form-control">{{ $customer->customer_name}}</h3>

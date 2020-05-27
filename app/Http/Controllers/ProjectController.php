@@ -28,6 +28,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $project = Project::find(1);
+        $project->members()->attach([1, 2, 3]);
         $data = [
             'projects' => Project::all(),
             'members' => Member::all(),
@@ -56,7 +58,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return view('projects.show');
+        $data = [
+            'project' => Project::findOrFail($id),
+        ];
+        return view('projects.show', $data);
     }
 
     /**

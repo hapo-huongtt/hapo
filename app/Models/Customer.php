@@ -16,8 +16,8 @@ class Customer extends Model
     protected $fillable = [
          'image', 'customer_name', 'address', 'phone', 'email',
     ];
-    public function tasks()
+    public function projects()
     {
-        return $this->belongstoMany('App\Models\task');
+        return $this->hasMany(Project::class);
     }
 }

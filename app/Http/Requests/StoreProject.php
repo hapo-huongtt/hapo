@@ -27,7 +27,6 @@ class Storeproject extends FormRequest
             'project_name' => 'required',
             'description' => 'required',
             'status_id' => 'required',
-            'member_id' => 'required',
             'customer_id' => 'required',
             'began_at' => 'required|date',
             'finished_at' => 'required|date',

@@ -20,7 +20,7 @@ class CreatetasksTable extends Migration
             $table->bigInteger('status_id');
             $table->date('began_at');
             $table->date('finished_at');
-            $table->bigInteger('member_id')->unsigned();
+            $table->bigInteger('members_id')->unsigned();
             $table->integer('customer_id');
             $table->timestamps();
         });

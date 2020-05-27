@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('members', 'MemberController');
-
 Route::resource('tasks', 'TaskController');
 Route::resource('customers', 'CustomerController');
 Route::resource('projects', 'ProjectController');

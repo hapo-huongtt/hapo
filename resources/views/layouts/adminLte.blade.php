@@ -8,14 +8,8 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link href="./css/prettify-1.0.css" rel="stylesheet">
-  <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-  <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script> -->
+  <link rel="stylesheet" href="select2.css">
+  <link rel="stylesheet" href="select2-bootstrap.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -118,17 +112,19 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="{{url('projects')}}" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-tree"></i>
                 <p class="h4">
                   Project
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
             </li>
             <li class="nav-item has-treeview">
               <a href="{{url('customers')}}" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-user-secret"></i>
                 <p class="h4">
                   Customer
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
             </li>
@@ -147,6 +143,12 @@
   </div>
   </div>
   <script src="{{ asset('js/app.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.datepicker-here').datepicker({});
+      selectpicker
+    });
+  </script>
 </body>
 
 </html>

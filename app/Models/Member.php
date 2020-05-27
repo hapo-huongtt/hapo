@@ -48,6 +48,6 @@ class Member extends Authenticatable
     }
     public function projects()
     {
-        return $this->belongstoMany(Project::class);
+        return $this->belongsToMany(Project::class);
     }
 }

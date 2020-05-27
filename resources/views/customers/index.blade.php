@@ -2,9 +2,8 @@
 
 @section('content')
 
-<section class="content">
-    <div class="row">
-        <div class="container">
+<div class="row">
+    <div class="container">
         <div class="col-lg-12" style="text-align: center">
             <h1>Customer</h1>
         </div>
@@ -16,29 +15,29 @@
         @if(session()->get('success'))
         <div class="alert alert-success">
             {{ session()->get('success') }}
-        </div><br />
+        </div>
         @endif
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered">
             <thead>
-                <tr class="d-flex">
-                    <th class="col-1">Id</th>
-                    <th class="col-1">Avatar</th>
-                    <th class="col-2">Customer_name</th>
-                    <th class="col-2">Address</th>
-                    <th class="col-1">Phone</th>
-                    <th class="col-1">Email</th>
-                    <th class="col-4">Action</th>
+                <tr>
+                    <td class="text-center"><strong>Id</strong></td>
+                    <td class="text-center"><strong>Avatar</strong></td>
+                    <td class="text-center"><strong>Customer_name</strong></td>
+                    <td class="text-center"><strong>Address</strong></td>
+                    <td class="text-center"><strong>Phone</strong></td>
+                    <td class="text-center"><strong>Email</strong></td>
+                    <td colspan=3 class="text-center">Action</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($customers as $customer)
-                <tr class="d-flex">
-                    <th class="col-1">{{ $customer->id }}</th>
-                    <td class="col-1"><img src="{{ $customer->image }}" class="w-100"></td>
-                    <td class="col-2">{{ $customer->customer_name }}</td>
-                    <td class="col-2">{{ $customer->address }}</td>
-                    <td class="col-1">{{ $customer->phone }}</td>
-                    <td class="col-2">{{ $customer->email }}</td>
+                <tr>
+                    <td class="text-center">{{ $customer->id }}</td>
+                    <td class="text-center"><img src="{{ $customer->image }}" style="width:70px; height:70px"></td>
+                    <td class="text-center">{{ $customer->customer_name }}</td>
+                    <td class="text-center">{{ $customer->address }}</td>
+                    <td class="text-center">{{ $customer->phone }}</td>
+                    <td class="text-center">{{ $customer->email }}</td>
                     <td>
                         <a class="btn btn-info" href="{{route('customers.show',$customer->id)}}">Show</a>
                     </td>
@@ -56,8 +55,7 @@
                 @endforeach
             </tbody>
         </table>
-</div>
     </div>
-</section>
+</div>
 
 @endsection
