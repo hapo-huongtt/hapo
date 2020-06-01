@@ -27,6 +27,17 @@
             <label for="status">Email:</label>
             <p type="text" class="form-control">{{ $customer->email}}</b></p>
         </div>
+        <div class="form-group">
+            <label for="address">Project:</label>
+            <p type="text">
+                @foreach($customer->projects as $project)
+                <ul>
+                    <li style="list-style-type:none">
+                        {{$project->project_name}}
+                    </li>
+                </ul>
+                @endforeach</b></p>
+        </div>
         <td colspan="2" style="text-align: right "><a href="{{ route('tasks.index') }}" class="btn btn-danger">OK</a>
     </div>
 </div>

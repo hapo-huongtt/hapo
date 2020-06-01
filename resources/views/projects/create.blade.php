@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label>Member</label>
-                            <select class="selectpicker form-control" multiple style="width: 100%">
+                            <select class="select2-multiple"  multiple="multiple" style="width: 100%" name="member_id[]">
                                 @foreach($members as $member)
                                 <option value="{{$member->id}}">{{$member->name}}</option>
                                 @endforeach
@@ -55,7 +55,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Status_id</label>
+                            <label>Status</label>
                             <select type="text" class="form-control" name="status_id">
                                 <option>Please choose a status</option>
                                 <option value="@php echo App\Models\Member::STATUS_PENDING @endphp">Pending</option>
@@ -96,4 +96,3 @@
     </div>
 
     @endsection
-    

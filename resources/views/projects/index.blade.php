@@ -44,7 +44,15 @@
                         {{ "pending" }}
                         @endif
                     </td>
-                    <td class="text-center">{{$project->member_name}}</td>
+                    <td class="text-center">
+                        @foreach($project->members as $member)
+                        <ul>
+                            <li style="list-style-type:none">
+                                {{$member->name}}
+                            </li>
+                        </ul>
+                        @endforeach
+                    </td>
                     <td class="text-center">{{$project->customer_name}}</td>
                     <td class="text-center">{{$project->began_at}}</td>
                     <td class="text-center">{{$project->finished_at}}</td>

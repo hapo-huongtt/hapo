@@ -22,12 +22,20 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="customer_id">Member:</label>
-            <p type="text" class="form-control">{{ $project->member_name}}</b></p>
+            <label for="member_id">member:</label>
+            <p type="text">
+                @foreach($project->members as $member)
+                <ul>
+                    <li style="list-style-type:none">
+                        {{$member->name}}
+                    </li>
+                </ul>
+                @endforeach
+            </p>
         </div>
         <div class="form-group">
             <label for="customer_id">Customer:</label>
-            <p type="text" class="form-control">{{ $project->customer_name}}</b></p>
+            <p type="text" class="form-control">{{ $project->customer_name}}</p>
         </div>
         <div class="form-group">
             <label for="began_at">Began_at:</label>

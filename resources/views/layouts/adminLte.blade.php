@@ -143,10 +143,17 @@
   </div>
   </div>
   <script src="{{ asset('js/app.js') }}"></script>
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     $(document).ready(function() {
       $('.datepicker-here').datepicker({});
-      selectpicker
+      $(document).ready(function() {
+    $('.select2-multiple').select2();
+});
+    });
+  </script> -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.select2-multiple').select2();
     });
   </script>
 </body>

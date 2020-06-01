@@ -11,14 +11,16 @@
                 <a class="btn btn-primary float-left " href="{{ route('members.create')}}">New member</a>
             </div>
         </div>
-        <!-- <div class="col-8 form-group">
-            <form action="{{ route('members.index') }}" method="GET">
-                <div class="input-group">
-                    <input type="search" name="searchByName" placeholder="Tên" class="form-control" value="{{ old('searchByName') }}" autocomplete="off">
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        <form class="form-group md-4 float-right">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-            </form>
-        </div> -->
+            </div>
+        </form>
         <br />
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -37,6 +39,8 @@
                     <td class="text-center"><strong>Phone</strong></td>
                     <td class="text-center"><strong>Address</strong></td>
                     <td class="text-center"><strong>Role</strong></td>
+                    <td class="text-center"><strong>Task</strong></td>
+                    <td class="text-center"><strong>Project</strong></td>
                     <td colspan=3 class="text-center"><strong>Action</strong></td>
                 </tr>
             </thead>
@@ -56,6 +60,24 @@
                     <td class="text-center">{{$member->phone}}</td>
                     <td class="text-center">{{$member->address}}</td>
                     <td class="text-center">{{$member->role}}</td>
+                    <td class="text-center">
+                        @foreach($member->tasks as $task)
+                        <ul>
+                            <li style="list-style-type:none">
+                                {{$task->task_name}}
+                            </li>
+                        </ul>
+                        @endforeach
+                    </td>
+                    <td class="text-center">
+                        @foreach($member->projects as $project)
+                        <ul>
+                            <li style="list-style-type:none">
+                                {{$project->project_name}}
+                            </li>
+                        </ul>
+                        @endforeach
+                    </td>
                     <td>
                         <a class="btn btn-info" href="{{route('members.show',$member->id)}}">Show</a>
                     </td>

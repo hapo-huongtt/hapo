@@ -15,16 +15,11 @@ class Project extends Model
     }
     public function customers()
     {
-        return $this->belongsTo('App\Models\Customer', 'customer_id', 'id');
+        return $this->belongsTo(Customer::class);
     }
     public function getCustomerNameAttribute()
     {
         $customer = Customer::findOrFail($this->customer_id);
         return $customer->customer_name;
-    }
-    public function getMemberNameAttribute($id)
-    {
-        $member = Member::findOrFail(1);
-        return $member->name;
     }
 }

@@ -28,8 +28,6 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $project = Project::find(1);
-        $project->members()->attach([1, 2, 3]);
         $data = [
             'projects' => Project::all(),
             'members' => Member::all(),
@@ -46,7 +44,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProject $request)
     {
-        Project::create($request->all());
+        $data = $request->all();
+        $project = Project::create($data);
+        $project->members()->attach($data['member_id']);
         return redirect()->route('projects.index')->with('success', __('messages.create'));
     }
 

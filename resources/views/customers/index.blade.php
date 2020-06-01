@@ -26,6 +26,7 @@
                     <td class="text-center"><strong>Address</strong></td>
                     <td class="text-center"><strong>Phone</strong></td>
                     <td class="text-center"><strong>Email</strong></td>
+                    <td class="text-center"><strong>Project</strong></td>
                     <td colspan=3 class="text-center">Action</td>
                 </tr>
             </thead>
@@ -38,6 +39,15 @@
                     <td class="text-center">{{ $customer->address }}</td>
                     <td class="text-center">{{ $customer->phone }}</td>
                     <td class="text-center">{{ $customer->email }}</td>
+                    <td class="text-center">
+                        @foreach($customer->projects as $project)
+                        <ul>
+                            <li style="list-style-type:none">
+                                {{$project->project_name}}
+                            </li>
+                        </ul>
+                        @endforeach
+                    </td>
                     <td>
                         <a class="btn btn-info" href="{{route('customers.show',$customer->id)}}">Show</a>
                     </td>
