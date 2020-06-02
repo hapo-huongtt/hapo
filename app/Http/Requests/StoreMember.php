@@ -34,11 +34,4 @@ class StoreMember extends FormRequest
             'password' => ['required', 'string', 'min:8'],
         ];
     }
-    public function messages()
-    {
-        return [
-            'required' => ':attribute Không được để trống',
-            'max' => ':attribute Không được quá :max ký tự',
-        ];
-    }
 }

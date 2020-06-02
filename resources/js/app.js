@@ -6,3 +6,7 @@ require('select2');
 $(document).ready(function() {
     $('.select2-multiple').select2();
 });
+
+$(function () {
+$('#datetimepicker').datetimepicker();
+});

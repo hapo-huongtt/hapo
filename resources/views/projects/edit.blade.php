@@ -34,8 +34,16 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label>Member</label>
+                            <select class="select2-multiple" multiple="multiple" style="width: 100%" name="member_id[]">
+                                @foreach($members as $member)
+                                <option value="{{$member->id}}">{{$member->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Customer_id</label>
-                            <select class="form-control" name="customer_id">
+                            <select class="form-control" name="customer_id" value="{{$project->customer_id}}">
                                 @foreach($customers as $customer)
                                 <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
                                 @endforeach
@@ -44,7 +52,7 @@
                         <div class="form-group">
                             <label>Status_id</label>
                             <select type="text" class="form-control" name="status_id">
-                                <option>Please choose a status</option>
+                                <!-- <option>Please choose a status</option> -->
                                 <option value="@php echo App\Models\Member::STATUS_PENDING @endphp">Pending</option>
                                 <option value="@php echo App\Models\Member::STATUS_CLOSE @endphp">completed</option>
                             </select>

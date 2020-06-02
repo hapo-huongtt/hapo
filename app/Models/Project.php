@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'project_name', 'description', 'status_id', 'customer_id', 'began_at', 'finished_at'
+        'project_name', 'description', 'status_id', 'customer_id', 'began_at', 'finished_at',
     ];
     public function members()
     {
@@ -21,5 +21,9 @@ class Project extends Model
     {
         $customer = Customer::findOrFail($this->customer_id);
         return $customer->customer_name;
+    }
+    public function tasks()
+    {
+        return $this->hasMany('App\Models\task');
     }
 }

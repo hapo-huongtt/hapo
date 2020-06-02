@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Member;
 use App\Http\Requests\StoreProject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -90,7 +91,10 @@ class ProjectController extends Controller
     public function update(StoreProject $request, $id)
     {
         $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $data=$request->all();
+        $project->update($data);
+        $project->members()->detach([6,7,8,9]);
+        $project->members()->attach($data['member_id']);
         return redirect()->route('projects.index')->with('success', 'project update!');
     }
 

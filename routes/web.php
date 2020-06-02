@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/search', 'MemberController@search');
 Route::resource('members', 'MemberController');
 Route::resource('tasks', 'TaskController');
 Route::resource('customers', 'CustomerController');

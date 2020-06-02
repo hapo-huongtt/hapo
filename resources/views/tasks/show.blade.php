@@ -24,8 +24,12 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="member_id">Member_id:</label>
-            <p type="text" class="form-control">{{ $task->members->name}}</b></p>
+            <label for="member_id">Member:</label>
+            <p type="text" class="form-control">{{ $task->member_name}}</b></p>
+        </div>
+        <div class="form-group">
+            <label for="project_id">Project:</label>
+            <p type="text" class="form-control">{{ $task->project_name}}</b></p>
         </div>
         <div class="form-group">
             <label for="began_at">Began_at:</label>

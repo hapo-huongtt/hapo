@@ -22,7 +22,7 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="member_id">member:</label>
+            <label for="member">member:</label>
             <p type="text">
                 @foreach($project->members as $member)
                 <ul>

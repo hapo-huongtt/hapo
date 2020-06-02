@@ -8,18 +8,6 @@
                 <div class="card-header">
                     <h3 class="card-title">Add Customer</h3>
                 </div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>
-                            {{$error}}
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                </br>
-                @endif
                 <form role="form" id="quickForm" action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">

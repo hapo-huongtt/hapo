@@ -24,15 +24,15 @@ class UpdateMember extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'age' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'role' => ['nullable', 'max:255'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['nullable', 'string', 'min:8'],
         ];
     }
 }

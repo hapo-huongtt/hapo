@@ -63,11 +63,31 @@
                         <a class="btn btn-primary" href="{{route('projects.edit',$project->id)}}">Edit</a>
                     </td>
                     <td>
-                        <form action="{{route('projects.destroy',$project->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                        <div>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStatus">Delete
+                            </button>
+                            <div class="modal fade" id="deleteStatus" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <p>Are you sure you want to delete this?</p>
+                                                <a href="{{ route('projects.index') }}" class="btn btn-secondary">Cancel</a>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

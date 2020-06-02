@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateMember;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -16,6 +18,12 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $members = DB::table('members')->where('name', 'like', '%'.$search.'%')->paginate(5);
+        return view('members.index', ['members' => $members]);
+    }
     public function index()
     {
         $members = Member::all();
@@ -95,21 +103,15 @@ class MemberController extends Controller
     public function update(UpdateMember  $request, $id)
     {
         $data = $request->all();
-        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->storeAs('public/images', $imageName);
-        $imageName = 'storage/images/' . $imageName;
-        $member = [
-            'image' => $imageName,
-            'name' => $data['name'],
-            'age' => $data['age'],
-            'gender' => $data['gender'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'role' => $data['role'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ];
-        $member = Member::findOrFail($id)->update($member);
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        if ($request->has('image')) {
+            $storageFile = Storage::put('public/images/', $request->image);
+            $data['image'] = basename($storageFile);
+            Storage::delete('public/images/' . auth()->user()->image);
+        }
+        $data = Member::findOrFail($id)->update($data);
         return redirect()->route('members.index')->with('success', ('messages.update'));
     }
 

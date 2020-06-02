@@ -22,20 +22,7 @@
         <li class="nav-item d-none d-sm-inline-block">
           <a href="{{url('home')}}" class="nav-link">Home</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
-        </li>
       </ul>
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
@@ -143,14 +130,14 @@
   </div>
   </div>
   <script src="{{ asset('js/app.js') }}"></script>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function() {
       $('.datepicker-here').datepicker({});
       $(document).ready(function() {
     $('.select2-multiple').select2();
 });
     });
-  </script> -->
+  </script>
   <script type="text/javascript">
     $(document).ready(function() {
       $('.select2-multiple').select2();

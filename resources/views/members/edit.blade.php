@@ -72,8 +72,15 @@
                             @enderror
                         </div>
                         <div class="form-group row">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Enter password" value="{{ $member->password }}">
+                            @error('password')
+                            <strong class="alert text-danger">{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        <!-- <div class="form-group row">
                             <label for="password" class="col-md-6 col-form-label">{{ __('Password') }}</label>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter password" required autocomplete="new-password">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -81,13 +88,13 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-6 col-form-label">{{ __('Confirm Password') }}</label>
-                            <div class="col-md-6">
+                        </div> -->
+                        <!-- <div class="form-group row">
+                            <label for="password-confirm" class="col-md-12 col-form-label">{{ __('Confirm Password') }}</label>
+                            <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required autocomplete="new-password">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                             <label>Role</label>
                             <select name="role">

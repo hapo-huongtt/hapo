@@ -17,7 +17,7 @@
                     You are logged in!
                 </div>
             </div> -->
-            <div class="display-4 text-success"> ^_^</div>
+            <div class="display-4 text-success"> Hello World ^_^</div>
         </div>
     </div>
 </div>

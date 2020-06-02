@@ -8,18 +8,6 @@
                 <div class="card-header">
                     <h3 class="card-title">Add Member</h3>
                 </div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>
-                            {{$error}}
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                </br>
-                @endif
                 <form role="form" id="quickForm" action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -31,14 +19,14 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Name<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="text" class="form-control" name="name" autocomplete="off" placeholder="Enter name" value="{{ old('name') }}">
                             @error('name')
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
+                            <label>Email<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="email" class="form-control" name="email" autocomplete="off" placeholder="Enter email" value="{{ old('email') }}">
                             @error('email')
                             <strong class="alert text-danger">{{ $message }}</strong>
@@ -60,21 +48,21 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Phone</label>
+                            <label>Phone<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="text" class="form-control" name="phone" autocomplete="off" placeholder="Enter phone" value="{{ old('phone') }}">
                             @error('phone')
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Address</label>
+                            <label>Address<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="text" class="form-control" name="address" autocomplete="off" placeholder="Enter address" value="{{ old('address') }}">
                             @error('address')
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>Password<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="password" class="form-control" name="password" autocomplete="current-password" placeholder="Enter password">
                             @error('password')
                             <strong class="alert text-danger">{{ $message }}</strong>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\Member;
+use App\Models\Project;
 use App\Http\Requests\StoreTask;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -27,8 +29,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $member = Member::all();
-        return view('tasks.create', ['members' => $member]);
+        $data = [
+            'members' => Member::all(),
+            'projects' => Project::all(),
+        ];
+        return view('tasks.create', $data);
     }
 
     /**
@@ -67,6 +72,7 @@ class TaskController extends Controller
     {
         $data = [
             'members' => Member::all(),
+            'projects' => Project::all(),
             'task' => Task::findOrFail($id),
         ];
         return view('tasks.edit', $data);
