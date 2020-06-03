@@ -7,10 +7,20 @@
         <div class="col-lg-12" style="text-align: center">
             <h1>Task</h1>
         </div>
-        <div class="col-lg-12 margin-tb">
+        <div class="col-md-4 p-3">
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('tasks.create')}}">New task</a>
             </div>
+        </div>
+        <div class="col-md-4 p-3 float-right">
+            <form action="{{url('/searchs')}}" method="Get">
+                <div class="input-group">
+                    <input value="{{Request::get('searchs')}}" type="search" name="searchs" class="form-control"  autocomplete="off" placeholder="Search">
+                    <span class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary">search</button>
+                    </span>
+                </div>
+            </form>
         </div>
         <br />
         @if ($message = Session::get('success'))
@@ -74,7 +84,7 @@
                                                 @csrf
                                                 <p>Are you sure you want to delete this?</p>
                                                 <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Cancel</a>
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary floate-right">Ok</button>
                                             </form>
                                         </div>
                                     </div>
@@ -88,5 +98,6 @@
         </table>
     </div>
 </div>
+{{$tasks->links()}}
 
 @endsection

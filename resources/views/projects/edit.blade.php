@@ -1,6 +1,6 @@
 @extends('layouts.adminLte')
+  
 @section('content')
-
 
 <div class="row">
     <div class="container">
@@ -37,7 +37,7 @@
                             <label>Member</label>
                             <select class="select2-multiple" multiple="multiple" style="width: 100%" name="member_id[]">
                                 @foreach($members as $member)
-                                <option value="{{$member->id}}">{{$member->name}}</option>
+                                <option value="{{$member->id}}" @if($member->id==$member->id) selected @endif>{{$member->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -45,14 +45,13 @@
                             <label>Customer_id</label>
                             <select class="form-control" name="customer_id" value="{{$project->customer_id}}">
                                 @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
+                                <option value="{{$customer->id}}" @if($project->customer_id==$customer->id) selected @endif>{{$customer->customer_name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Status_id</label>
                             <select type="text" class="form-control" name="status_id">
-                                <!-- <option>Please choose a status</option> -->
                                 <option value="@php echo App\Models\Member::STATUS_PENDING @endphp">Pending</option>
                                 <option value="@php echo App\Models\Member::STATUS_CLOSE @endphp">completed</option>
                             </select>

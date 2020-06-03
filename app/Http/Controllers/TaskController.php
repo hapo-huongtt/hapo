@@ -16,9 +16,13 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $searchs = $request->get('searchs');
+        $tasks = Task::paginate(2);
+        if ($searchs) {
+            $tasks = Task::where('task_name', 'LIKE', '%'.$searchs.'%')->paginate(2);
+        }
         return view('tasks.index', ['tasks' => $tasks]);
     }
 

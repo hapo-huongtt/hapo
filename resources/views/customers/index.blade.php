@@ -12,6 +12,16 @@
                 <a class="btn btn-primary float-left " href="{{ route('customers.create')}}">New Customer</a>
             </div>
         </div>
+        <div class="col-md-4 p-3 float-right">
+            <form action="{{url('/keyword')}}" method="get">
+                <div class="input-group">
+                    <input value="{{Request::get('keyword')}}" type="search" name="keyword" class="form-control"  autocomplete="off" placeholder="Search">
+                    <span class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary">search</button>
+                    </span>
+                </div>
+            </form>
+        </div>
         @if(session()->get('success'))
         <div class="alert alert-success">
             {{ session()->get('success') }}
@@ -73,7 +83,7 @@
                                                 @csrf
                                                 <p>Are you sure you want to delete this?</p>
                                                 <a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary float-right">Ok</button>
                                             </form>
                                         </div>
                                     </div>
@@ -87,5 +97,6 @@
         </table>
     </div>
 </div>
+{{$customers->links()}}
 
 @endsection

@@ -18,15 +18,14 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+
+    public function index(Request $request)
     {
         $search = $request->get('search');
-        $members = DB::table('members')->where('name', 'like', '%'.$search.'%')->paginate(5);
-        return view('members.index', ['members' => $members]);
-    }
-    public function index()
-    {
-        $members = Member::all();
+        $members = Member::paginate(2);
+        if ($search) {
+            $members = Member::where('name', 'like', '%' . $search . '%')->paginate(2);
+        }
         return view('members.index', ['members' => $members]);
     }
 

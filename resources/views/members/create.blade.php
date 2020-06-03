@@ -1,4 +1,5 @@
 @extends('layouts.adminLte')
+
 @section('content')
 
 <div class="row">
@@ -26,14 +27,14 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Email<span style="color:red; font-weight:bold;">*</span></label>
+                            <label>Email</label>
                             <input type="email" class="form-control" name="email" autocomplete="off" placeholder="Enter email" value="{{ old('email') }}">
                             @error('email')
                             <strong class="alert text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Age</label>
+                            <label>Age<span style="color:red; font-weight:bold;">*</span></label>
                             <input type="text" class="form-control" name="age" autocomplete="off" placeholder="Enter age" value="{{ old('age') }}">
                             @error('age')
                             <strong class="alert text-danger">{{ $message }}</strong>

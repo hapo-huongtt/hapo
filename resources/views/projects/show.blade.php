@@ -34,6 +34,18 @@
             </p>
         </div>
         <div class="form-group">
+            <label for="member">Task:</label>
+            <p type="text">
+                @foreach($project->tasks as $task)
+                <ul>
+                    <li style="list-style-type:none">
+                        {{$task->task_name}}
+                    </li>
+                </ul>
+                @endforeach
+            </p>
+        </div>
+        <div class="form-group">
             <label for="customer_id">Customer:</label>
             <p type="text" class="form-control">{{ $project->customer_name}}</p>
         </div>

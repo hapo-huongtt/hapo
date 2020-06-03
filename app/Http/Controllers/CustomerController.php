@@ -16,9 +16,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $keyword = $request->get('keyword');
+        $customers = Customer::paginate(2);
+        if ($keyword) {
+            $customers = Customer::where('customer_name', 'LIKE', '%'.$keyword.'%')->paginate(2);
+        }
         return view('customers.index', ['customers' => $customers]);
     }
 

@@ -23,8 +23,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/search', 'MemberController@search');
+Route::get('/', 'MemberController@index');
 Route::resource('members', 'MemberController');
+Route::get('/list', 'MemberController@list');
 Route::resource('tasks', 'TaskController');
+Route::get('/searchs', 'TaskController@index');
 Route::resource('customers', 'CustomerController');
+Route::get('/keyword', 'CustomerController@index');
 Route::resource('projects', 'ProjectController');
+Route::get('/search', 'ProjectController@index');

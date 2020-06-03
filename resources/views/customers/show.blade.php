@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="name">Avatar:</label>
-            <p type="text" class="form-control">{{ $customer->image}}</h3>
+            <td class="text-center"><img src="{{ asset($customer->image) }}" style="width:70px; height:70px"></td>
         </div>
         <div class="form-group">
             <label for="status">Address:</label>

@@ -1,4 +1,5 @@
 @extends('layouts.adminLte')
+
 @section('content')
 
 <div class="'row">
@@ -12,9 +13,9 @@
             </div>
         </div>
         <div class="col-md-4 p-3 float-right">
-            <form action="/search" method="get">
+            <form action="{{url('/')}}" method="get">
                 <div class="input-group">
-                    <input type="search" name="search" class="form-control">
+                    <input value="{{Request::get('search')}}" type="search" name="search" class="form-control" autocomplete="off" placeholder="Search">
                     <span class="input-group-prepend">
                         <button type="submit" class="btn btn-primary">search</button>
                     </span>
@@ -89,7 +90,7 @@
                                                 @csrf
                                                 <p>Are you sure you want to delete this?</p>
                                                 <a href="{{ route('members.index') }}" class="btn btn-secondary">Cancel</a>
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary float-right">Ok</button>
                                             </form>
                                         </div>
                                     </div>
@@ -103,5 +104,6 @@
         </table>
     </div>
 </div>
+{{ $members->links() }}
 
 @endsection

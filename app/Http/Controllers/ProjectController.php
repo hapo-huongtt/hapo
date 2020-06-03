@@ -16,9 +16,13 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $key = $request->get('key');
+        $projects = Project::paginate(2);
+        if ($key) {
+            $projects = Project::where('project_name', 'like', '%'.$key.'%')->paginate(2);
+        }
         return view('projects.index', ['projects' => $projects]);
     }
 
@@ -91,9 +95,9 @@ class ProjectController extends Controller
     public function update(StoreProject $request, $id)
     {
         $project = Project::findOrFail($id);
-        $data=$request->all();
-        $project->update($data);
-        $project->members()->detach([6,7,8,9]);
+        $data = $request->all();
+        $project->update($request->all());
+        $project->members()->detach();
         $project->members()->attach($data['member_id']);
         return redirect()->route('projects.index')->with('success', 'project update!');
     }

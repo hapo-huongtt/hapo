@@ -1,4 +1,5 @@
 @extends('layouts.adminLte')
+
 @section('content')
 
 <div class="container">
@@ -9,11 +10,11 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="avatar">Avatar:</label>
-                <p type="file" class="form-control">{{ $members->image}}</h3>
+                <td class="text-center"><img src="{{ asset($members->image) }}" style="width:70px; height:70px"></td>
             </div>
             <div class="form-group">
                 <label for="name">Name:</label>
-                <p type="text" class="form-control">{{ $members->name}}</h3>
+                <p type="text" class="form-control">{{ $members->name}}</p>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>

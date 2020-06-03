@@ -9,16 +9,6 @@
                 <div class="card-header">
                     <h3 class="card-title h4">Update Task</h3>
                 </div>
-                <!-- @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                <br />
-                @endif -->
                 <form method="post" action="{{ route('tasks.update', $task->id)}}">
                     @method('PATCH')
                     @csrf
@@ -34,7 +24,6 @@
                         <div class="form-group">
                             <label>Status_id</label>
                             <select type="text" class="form-control" name="status_id" value="{{$task->status_id}}">
-                                <option>Please choose a status</option>
                                 <option value="@php echo \App\Models\Member::STATUS_PENDING @endphp">Pending</option>
                                 <option value="@php echo \App\Models\Member::STATUS_CLOSE @endphp">completed</option>
                             </select>
@@ -43,7 +32,7 @@
                             <label>Member</label>
                             <select class="form-control" name="member_id" name="member_id" value="{{$task->member_id}}">
                                 @foreach($members as $member)
-                                <option value="{{$member->id}}">{{$member->name}}</option>
+                                <option value="{{$member->id}}" @if($task->member_id==$member->id) selected @endif>{{$member->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -51,7 +40,7 @@
                             <label>Project</label>
                             <select class="form-control" name="project_id">
                                 @foreach($projects as $project)
-                                <option value="{{$project->id}}">{{$project->project_name}}</option>
+                                <option value="{{$project->id}}" @if($task->project_id==$project->id) selected @endif >{{$project->project_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -88,4 +77,3 @@
     </div>
 
     @endsection
-    

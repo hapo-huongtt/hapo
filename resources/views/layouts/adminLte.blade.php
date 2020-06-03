@@ -84,7 +84,7 @@
                 <i class="nav-icon fas fa-user-alt"></i>
                 <p class="h4">
                   Member
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
@@ -93,7 +93,7 @@
                 <i class="nav-icon fas fas fa-edit"></i>
                 <p class=" h4">
                   task
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
@@ -102,7 +102,7 @@
                 <i class="nav-icon fas fa-tree"></i>
                 <p class="h4">
                   Project
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
@@ -111,7 +111,7 @@
                 <i class="nav-icon fas fa-user-secret"></i>
                 <p class="h4">
                   Customer
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
