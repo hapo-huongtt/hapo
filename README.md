@@ -18,7 +18,7 @@ Quickly set up skeleton for your Laravel 7.x app
 - Authentication by email & password 
 
 ## Install: 
-1. Clone this project 
+1. Clone this task 
 2. Run `composer install`
 3. Run `npm install & npm run dev`
 4. Create .env file : `cp .env.example .env`

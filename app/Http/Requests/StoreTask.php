@@ -27,9 +27,9 @@ class StoreTask extends FormRequest
             'task_name' => 'required',
             'description' => 'required',
             'status_id' => 'required',
-            'members_id' => 'request',
-            'began_at' => 'request',
-            'finish_at' => 'request',
+            'member_id' => 'required',
+            'began_at' => 'required|date',
+            'finished_at' => 'required|date',
         ];
     }
 }

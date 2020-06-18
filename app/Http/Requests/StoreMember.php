@@ -27,10 +27,10 @@ class StoreMember extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
             'age' => ['required', 'string', 'max:255'],
-            'gender' => ['required','string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'tinyInteger', 'max:255'],
+            'role' => ['nullable', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ];
     }

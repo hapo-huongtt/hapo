@@ -4,30 +4,58 @@
 
 <div class="card">
     <div class="card-body">
-        <h2>member</h2>
+        <h2>Project</h2>
         <div class="form-group">
-            <label for="name">name:</label>
-            <p type="text" class="form-control">{{ $member->name}}</h3>
+            <label for="name">project_name:</label>
+            <p type="text" class="form-control">{{ $project->project_name}}</h3>
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
-            <p type="text" class="form-control">{{ $member->email}}</p>
+            <label for="description">Description:</label>
+            <p type="text" class="form-control">{{ $project->description}}</p>
         </div>
         <div class="form-group">
-            <label for="age">Age:</label>
-            <p type="text" class="form-control">{{ $member->age}}</b></p>
+            <label for="status_id">Status:</label>
+            @if($project->status_id === \App\Models\Member::STATUS_PENDING)
+            <p type="text" class="form-control">Pending</b></p>
+            @else
+            <p type="text" class="form-control">Completed</b></p>
+            @endif
         </div>
         <div class="form-group">
-            <label for="gender">Gender:</label>
-            <p type="text" class="form-control">{{ $member->gender}}</h3>
+            <label for="member">member:</label>
+            <p type="text">
+                @foreach($project->members as $member)
+                <ul>
+                    <li style="list-style-type:none">
+                        {{$member->name}}
+                    </li>
+                </ul>
+                @endforeach
+            </p>
         </div>
         <div class="form-group">
-            <label for="phone">Phone:</label>
-            <p type="text" class="form-control">{{ $member->phone}}</p>
+            <label for="member">Task:</label>
+            <p type="text">
+                @foreach($project->tasks as $task)
+                <ul>
+                    <li style="list-style-type:none">
+                        {{$task->task_name}}
+                    </li>
+                </ul>
+                @endforeach
+            </p>
         </div>
         <div class="form-group">
-            <label for="address">Address:</label>
-            <p type="text" class="form-control">{{ $member->address}}</b></p>
+            <label for="customer_id">Customer:</label>
+            <p type="text" class="form-control">{{ $project->customer_name}}</p>
+        </div>
+        <div class="form-group">
+            <label for="began_at">Began_at:</label>
+            <p type="date" class="form-control">{{ $project->began_at}}</b></p>
+        </div>
+        <div class="form-group">
+            <label for="finished_at">Finished_at:</label>
+            <p type="date" class="form-control">{{ $project->finished_at}}</b></p>
         </div>
         <td colspan="2" style="text-align: right "><a href="{{ route('members.index') }}" class="btn btn-danger">OK</a>
     </div>

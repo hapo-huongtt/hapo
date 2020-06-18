@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $table = 'projects';
     protected $fillable = [
-        'project_name', 'description', 'status_id', 'member_id', 'customer_id',
+        'project_name', 'description', 'status_id', 'customer_id', 'began_at', 'finished_at',
     ];
     public function members()
     {
-        return $this->belongstoMany('App\Moders\Member', 'member_project');
+        return $this->belongsToMany(Member::class);
     }
     public function customers()
     {
-        return $this->hasMany('App\Models\Customer')
-        ->withPivot('began_at', 'finished_at')
-        ->withTimestamps();
+        return $this->belongsTo(Customer::class);
+    }
+    public function getCustomerNameAttribute()
+    {
+        $customer = Customer::findOrFail($this->customer_id);
+        return $customer->customer_name;
     }
     public function tasks()
     {
-        return $this->howMany('App\Moders\Task');
+        return $this->hasMany('App\Models\task');
     }
 }

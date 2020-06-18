@@ -1,20 +1,43 @@
-@extends('layouts.app')
+@extends('layouts.adminLte')
 
 @section('content')
 
-<div class="card">
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Task</h3>
+    </div>
     <div class="card-body">
-        <h2>task</h2>
         <div class="form-group">
-            <label for="name">Task_name:</label>
-            <p type="text" class="form-control">{{ $task->task_name}}</h3>        </div>
+            <label for="name">task_name:</label>
+            <p type="text" class="form-control">{{ $task->task_name}}</h3>
+        </div>
         <div class="form-group">
             <label for="description">Description:</label>
             <p type="text" class="form-control">{{ $task->description}}</p>
         </div>
         <div class="form-group">
-            <label for="status">Status:</label>
-            <p type="text" class="form-control">{{ $task->status}}</b></p>
+            <label for="status_id">Status:</label>
+            @if($task->status_id === \App\Models\Member::STATUS_PENDING)
+            <p type="text" class="form-control">Pending</b></p>
+            @else
+            <p type="text" class="form-control">Completed</b></p>
+            @endif
+        </div>
+        <div class="form-group">
+            <label for="member_id">Member:</label>
+            <p type="text" class="form-control">{{ $task->member_name}}</b></p>
+        </div>
+        <div class="form-group">
+            <label for="project_id">Project:</label>
+            <p type="text" class="form-control">{{ $task->project_name}}</b></p>
+        </div>
+        <div class="form-group">
+            <label for="began_at">Began_at:</label>
+            <p type="date" class="form-control">{{ $task->began_at}}</b></p>
+        </div>
+        <div class="form-group">
+            <label for="finished_at">Finished_at:</label>
+            <p type="date" class="form-control">{{ $task->finished_at}}</b></p>
         </div>
         <td colspan="2" style="text-align: right "><a href="{{ route('tasks.index') }}" class="btn btn-danger">OK</a>
     </div>

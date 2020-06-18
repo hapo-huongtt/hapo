@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTables extends Migration
+class CreatetasksTables extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class CreateTasksTables extends Migration
             $table->increments('id');
             $table->string('task_name')->nullable();
             $table->string('description')->nullable();
+            $table->integer('member_id');
             $table->integer('project_id');
             $table->date('began_at');
             $table->date('finished_at');

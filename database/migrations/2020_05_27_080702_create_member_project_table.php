@@ -14,11 +14,9 @@ class CreateMemberProjectTable extends Migration
     public function up()
     {
         Schema::create('member_project', function (Blueprint $table) {
-            $table->bigInteger('member_id')->unsigned();
-            $table->bigInteger('project_id')->unsigned();
-            $table->date('began_at');
-            $table->date('finished_at');
-            $table->timestamps();
+            $table->id();
+            $table->integer('member_id')->unsigned();
+            $table->integer('project_id')->unsigned();
         });
     }
 

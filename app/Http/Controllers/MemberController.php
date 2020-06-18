@@ -1,28 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Member;
 use App\Http\Requests\StoreMember;
 use App\Http\Requests\UpdateMember;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
-use Redirect;
-use Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $members = Member::all();
+        $search = $request->get('search');
+        $members = Member::paginate(2);
+        if ($search) {
+            $members = Member::where('name', 'like', '%' . $search . '%')->paginate(2);
+        }
         return view('members.index', ['members' => $members]);
     }
 
@@ -46,18 +49,18 @@ class MemberController extends Controller
     {
         if (request()->hasFile('image')) {
             $imageupload = request()->file('image');
-            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
-            $imagepath = public_path('storage/images/' );
-            $imageupload->move($imagepath, $imagename);
+            $imagepath = config('file.members.file_path');
+            $image = Storage::put($imagepath, $imageupload);
+            $image = str_replace('public', 'storage', $image);
             Member::create([
-                'image' => 'storage/images/' . $imagename,
+                'image' => $image,
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'age' => $request['age'],
                 'gender' => $request['gender'],
                 'phone' => $request['phone'],
                 'address' => $request['address'],
-                'role' => 0,
+                'role' => $request['role'],
                 'password' => Hash::make($request['password']),
             ]);
         }
@@ -99,22 +102,16 @@ class MemberController extends Controller
     public function update(UpdateMember  $request, $id)
     {
         $data = $request->all();
-        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->storeAs('public/images', $imageName);
-        $imageName = 'storage/images/' . $imageName;
-        $member = [
-            'image' => $imageName,
-            'name' => $data['name'],
-            'age' => $data['age'],
-            'gender' => $data['gender'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'role' => 0,
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ];
-        $member = Member::findOrFail($id)->update($member);
-        return redirect()->route('members.index')->with('success', __('messages.update'));
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        if ($request->has('image')) {
+            $storageFile = Storage::put('public/images/', $request->image);
+            $data['image'] = basename($storageFile);
+            Storage::delete('public/images/' . auth()->user()->image);
+        }
+        $data = Member::findOrFail($id)->update($data);
+        return redirect()->route('members.index')->with('success', ('messages.update'));
     }
 
     /**

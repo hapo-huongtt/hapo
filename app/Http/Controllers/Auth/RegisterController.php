@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\StoreRegister;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,8 +50,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
     protected function validator(array $data)
-    { 
+    {
         return Validator::make($data, [
             'image' => ['required', 'image', 'max:5000'],
             'name' => ['required', 'string', 'max:255'],
@@ -59,7 +61,7 @@ class RegisterController extends Controller
             'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'tinyInteger', 'max:255'],
+            'role' => ['nullable', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -70,15 +72,16 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
     protected function create(array $data)
     {
-        if (request()->has('image')) {
+        if (request()->hasFile('image')) {
             $imageupload = request()->file('image');
-            $imagename = time() . '.' . $imageupload->getClientOriginalExtension();
-            $imagepath = public_path('storage/images/');
-            $imageupload->move($imagepath, $imagename);
+            $imagepath = config('file.members.file_path');
+            $image = Storage::put($imagepath, $imageupload);
+            $image = str_replace('public', 'storage', $image);
             return Member::create([
-                'image' => 'storage/images/' . $imagename,
+                'image' => $image,
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'age' => $data['age'],
@@ -86,7 +89,6 @@ class RegisterController extends Controller
                 'phone' => $data['phone'],
                 'address' => $data['address'],
                 'role' => 0,
-                'is_admin' => 0,
                 'password' => Hash::make($data['password']),
             ]);
         }

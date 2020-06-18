@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomer;
 use App\Http\Requests\UpdateCustomer;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -14,12 +16,14 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        {
-            $customers = Customer::all();
-            return view('customers.index', ['customers' => $customers]);
+        $keyword = $request->get('keyword');
+        $customers = Customer::paginate(2);
+        if ($keyword) {
+            $customers = Customer::where('customer_name', 'LIKE', '%'.$keyword.'%')->paginate(2);
         }
+        return view('customers.index', ['customers' => $customers]);
     }
 
     /**
@@ -40,12 +44,19 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomer $request)
     {
-        $data = $request->all();
-        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->storeAs('public/images', $imageName);
-        $imageName = 'storage/images/' . $imageName;
-        $data['image'] = $imageName;
-        Customer::create($data);
+        if (request()->hasFile('image')) {
+            $imageupload = request()->file('image');
+            $imagepath = config('file.members.file_path');
+            $image = Storage::put($imagepath, $imageupload);
+            $image = str_replace('public', 'storage', $image);
+            Customer::create([
+                'image' => $image,
+                'customer_name' => $request['customer_name'],
+                'email' => $request['email'],
+                'phone' => $request['phone'],
+                'address' => $request['address'],
+            ]);
+        }
         return redirect()->route('customers.index')->with('success', __('messages.create'));
     }
 
@@ -57,7 +68,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        return view('customers.show');
+        $customer = Customer::findOrFail($id);
+        return view('customers.show', ['customer' => $customer]);
     }
 
     /**
@@ -84,14 +96,18 @@ class CustomerController extends Controller
     public function update(UpdateCustomer $request, $id)
     {
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
-            request()->image->storeAs('public/images', $imageName);
-            $imageName = 'storage/images/' . $imageName;
-            $data['image'] = $imageName;
-        }
-        Customer::findOrFail($id)->update($data);
-        return redirect()->route('customers.index')->with('success', __('messages.update'));
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $imageName = 'storage/images/' . $imageName;
+        $customer = [
+            'image' => $imageName,
+            'customer_name' => $data['customer_name'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'email' => $data['email'],
+        ];
+        $customer = Customer::findOrFail($id)->update($customer);
+        return redirect()->route('customers.index')->with('success', ('messages.update'));
     }
 
     /**

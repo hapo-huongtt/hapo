@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Member;
+use App\Models\Project;
 use App\Http\Requests\StoreTask;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -13,9 +16,13 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $searchs = $request->get('searchs');
+        $tasks = Task::paginate(2);
+        if ($searchs) {
+            $tasks = Task::where('task_name', 'LIKE', '%'.$searchs.'%')->paginate(2);
+        }
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
@@ -26,7 +33,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        $data = [
+            'members' => Member::all(),
+            'projects' => Project::all(),
+        ];
+        return view('tasks.create', $data);
     }
 
     /**
@@ -35,10 +46,10 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTask $request)
     {
-        Task::create($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
-        return redirect('tasks.index')->with('success', 'Task save!');
+        Task::create($request->all());
+        return redirect()->route('tasks.index')->with('success', 'task save!');
     }
 
     /**
@@ -49,8 +60,10 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $task = Task::findOrFail($id);
-        return view('tasks.show', compact('task'));
+        $data = [
+            'task' => Task::findOrFail($id),
+        ];
+        return view('tasks.show', $data);
     }
 
     /**
@@ -61,8 +74,12 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::findOrFail($id);
-        return view('tasks.edit', compact('task'));
+        $data = [
+            'members' => Member::all(),
+            'projects' => Project::all(),
+            'task' => Task::findOrFail($id),
+        ];
+        return view('tasks.edit', $data);
     }
 
     /**
@@ -75,8 +92,8 @@ class TaskController extends Controller
     public function update(StoreTask $request, $id)
     {
         $task = Task::findOrFail($id);
-        $task->update($request->only(['task_name', 'description', 'status_id', 'member_id', 'began_at', 'finish_at']));
-        return redirect()->route('tasks.index')->with('success', 'Task update!');
+        $task->update($request->all());
+        return redirect()->route('tasks.index')->with('success', 'task update!');
     }
 
     /**

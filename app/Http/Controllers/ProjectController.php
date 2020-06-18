@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Project;
 use App\Models\Customer;
+use App\Models\Member;
 use App\Http\Requests\StoreProject;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -14,9 +16,13 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $key = $request->get('key');
+        $projects = Project::paginate(2);
+        if ($key) {
+            $projects = Project::where('project_name', 'like', '%'.$key.'%')->paginate(2);
+        }
         return view('projects.index', ['projects' => $projects]);
     }
 
@@ -28,6 +34,8 @@ class ProjectController extends Controller
     public function create()
     {
         $data = [
+            'projects' => Project::all(),
+            'members' => Member::all(),
             'customers' => Customer::all(),
         ];
         return view('projects.create', $data);
@@ -42,7 +50,8 @@ class ProjectController extends Controller
     public function store(StoreProject $request)
     {
         $data = $request->all();
-        Project::create($data);
+        $project = Project::create($data);
+        $project->members()->attach($data['member_id']);
         return redirect()->route('projects.index')->with('success', __('messages.create'));
     }
 
@@ -54,7 +63,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+            'project' => Project::findOrFail($id),
+        ];
+        return view('projects.show', $data);
     }
 
     /**
@@ -65,7 +77,12 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'project' => Project::findOrFail($id),
+            'members' => Member::all(),
+            'customers' => Customer::all(),
+        ];
+        return view('projects.edit', $data);
     }
 
     /**
@@ -75,9 +92,14 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProject $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $data = $request->all();
+        $project->update($request->all());
+        $project->members()->detach();
+        $project->members()->attach($data['member_id']);
+        return redirect()->route('projects.index')->with('success', 'project update!');
     }
 
     /**
@@ -88,6 +110,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+        return redirect('/projects')->with('project', 'project is successfully deleted');
     }
 }

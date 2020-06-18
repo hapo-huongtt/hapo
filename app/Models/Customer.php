@@ -14,10 +14,10 @@ class Customer extends Model
     protected $table = 'customers';
     public $timestamp = false;
     protected $fillable = [
-         'image', 'customer_name', 'gender', 'address', 'phone', 'email',
+         'image', 'customer_name', 'address', 'phone', 'email',
     ];
     public function projects()
     {
-        return $this->belongstoMany('App\Models\Project');
+        return $this->hasMany(Project::class);
     }
 }

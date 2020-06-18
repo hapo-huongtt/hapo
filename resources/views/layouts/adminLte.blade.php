@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="select2.css">
+  <link rel="stylesheet" href="select2-bootstrap.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -18,22 +20,9 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="{{url('home')}}" class="nav-link">Home</a>
         </li>
       </ul>
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
@@ -81,14 +70,12 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-          <image href="#" class="img-circle elevation-2" src="{{asset('Auth::User()->image')}}" style="width:30px; height:30px">
-
+            <image class="img-circle elevation-2" src="{{asset(Auth::User()->image)}}" style="width:30px; height:30px">
           </div>
           <div class="info">
-            <a href="#" class="d-block h4" src="{{asset('Auth::User()->name')}}"></a>
+            <a href="#" class="d-block h4">{{(Auth::User()->name)}}</a>
           </div>
         </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -97,7 +84,7 @@
                 <i class="nav-icon fas fa-user-alt"></i>
                 <p class="h4">
                   Member
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
@@ -105,23 +92,26 @@
               <a href="{{url('tasks')}}" class="nav-link">
                 <i class="nav-icon fas fas fa-edit"></i>
                 <p class=" h4">
-                  Task
+                  task
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
             <li class="nav-item has-treeview">
               <a href="{{url('projects')}}" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-tree"></i>
                 <p class="h4">
                   Project
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
             <li class="nav-item has-treeview">
               <a href="{{url('customers')}}" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-user-secret"></i>
                 <p class="h4">
                   Customer
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
             </li>
@@ -140,6 +130,19 @@
   </div>
   </div>
   <script src="{{ asset('js/app.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.datepicker-here').datepicker({});
+      $(document).ready(function() {
+    $('.select2-multiple').select2();
+});
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.select2-multiple').select2();
+    });
+  </script>
 </body>
 
 </html>
